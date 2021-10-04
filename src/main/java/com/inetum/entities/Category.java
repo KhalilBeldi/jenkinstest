@@ -20,6 +20,8 @@ import java.util.List;
 @Table
 public class Category {
 
+    //test purpose
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
