@@ -105,6 +105,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>inetum-app</finalName>
     </build>
 
     <profiles>
@@ -116,6 +117,7 @@
             <properties>
                 <sonar.host.url>http://localhost:9000/</sonar.host.url>
             </properties>
+
         </profile>
     </profiles>
 </project>
