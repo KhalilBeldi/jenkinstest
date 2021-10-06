@@ -40,13 +40,13 @@ public class CategoryService {
 
     public Category updateCategory(long id, Category category1){
 
-        Category cat = this.categoryRepository.findById(id).get();
+        Category category = this.categoryRepository.getById(id);
 
         if(!category1.getName().equals("")){
-            cat.setName(category1.getName());
+            category.setName(category1.getName());
         }
 
-        return this.categoryRepository.save(cat);
+        return this.categoryRepository.save(category);
 
     }
 

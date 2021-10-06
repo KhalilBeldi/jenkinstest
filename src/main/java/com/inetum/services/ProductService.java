@@ -6,6 +6,7 @@ import com.inetum.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +26,13 @@ public class ProductService {
 
         Optional<Category> category = this.categoryService.getCategoryById(id);
 
-        category.get().addProduct(product);
+        if(category.isPresent()) {
 
-        product.setCategory(category.get());
+            category.get().addProduct(product);
+
+            product.setCategory(category.get());
+
+        }
 
         return this.productRepository.save(product);
 
@@ -39,13 +44,13 @@ public class ProductService {
 
     public Product updateProduct(Product productRequest,long id){
 
-        Optional<Product> product = this.getProductById(id);
+        Product product = this.productRepository.getById(id);
 
-        product.get().setName(productRequest.getName());
-        product.get().setQuantity(productRequest.getQuantity());
-        product.get().setDisponibility(productRequest.getDisponibility());
+        product.setName(productRequest.getName());
+        product.setQuantity(productRequest.getQuantity());
+        product.setDisponibility(productRequest.getDisponibility());
 
-        return this.productRepository.save(product.get());
+        return this.productRepository.save(product);
     }
 
     public void deleteProduct(long id){
@@ -55,7 +60,12 @@ public class ProductService {
 
     public List<Product> getProductListByCategory(long id){
         Optional<Category> category = this.categoryService.getCategoryById(id);
-        return category.get().getProductList();
+        if(category.isPresent()){
+            return category.get().getProductList();
+        }else{
+            return new ArrayList<>();
+        }
+
     }
 
 
