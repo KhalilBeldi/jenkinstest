@@ -1,5 +1,6 @@
 package com.inetum.controllers;
 
+import com.inetum.exceptions.CustomAuthException;
 import com.inetum.models.AuthentificationRequest;
 import com.inetum.models.AuthentificationResponse;
 import com.inetum.services.MyUserDetailService;
@@ -27,13 +28,13 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping(path = "/authentificate")
-    public ResponseEntity<?> createAuthentificationToken(@RequestBody AuthentificationRequest authentificationRequest) throws Exception{
+    public ResponseEntity<AuthentificationResponse> createAuthentificationToken(@RequestBody AuthentificationRequest authentificationRequest) throws CustomAuthException {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authentificationRequest.getUsername(), authentificationRequest.getPassword())
             );
         }catch (BadCredentialsException e){
-            throw new Exception("Incorrect username or password");
+            throw new CustomAuthException("Incorrect username or password");
         }
 
         final UserDetails userDetails = userDetailService.loadUserByUsername(authentificationRequest.getUsername());

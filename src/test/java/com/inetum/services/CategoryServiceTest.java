@@ -74,20 +74,20 @@ class CategoryServiceTest {
     @Test
     void shouldUpdateSuccesfully(){
 
-//        Category category = new Category();
-//
-//        category.setId(1L);
-//        category.setName("Informatique");
-//
-//        when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-//
-//        Category changes = new Category();
-//        changes.setId(1L);
-//        changes.setName("électroménager");
-//
-//        when(categoryRepository.save(changes)).thenReturn(category);
-//
-//        assertThat(categoryService.updateCategory(1L,changes)).isEqualTo(category);
+        Category category = new Category();
+
+        category.setId(1L);
+        category.setName("Informatique");
+
+        when(categoryRepository.getById(1L)).thenReturn(category);
+
+        Category changes = new Category();
+        changes.setId(1L);
+        changes.setName("électroménager");
+
+        when(categoryRepository.save(changes)).thenReturn(category);
+
+        assertThat(categoryService.updateCategory(1L,changes)).isEqualTo(category);
 
     }
 

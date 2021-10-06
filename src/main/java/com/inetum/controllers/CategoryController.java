@@ -63,8 +63,8 @@ public class CategoryController {
 
         Category categoryRequest = modelMapper.map(categoryDTO, Category.class);
 
-        Optional<Category> category = Optional.ofNullable(categoryService.updateCategory(id, categoryRequest));
-        //convert entity to dto
+        Category category = this.categoryService.updateCategory(id,categoryRequest);
+
         CategoryDTO categoryResponse = modelMapper.map(category, CategoryDTO.class);
 
         return ResponseEntity.ok().body(categoryResponse);
